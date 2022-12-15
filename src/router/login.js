@@ -16,14 +16,12 @@ function getPassword() {
 }
 
 router.post('/', userMailValidate, (_req, res) => {
-        try{
-            res.status(200).json({ message: getPassword()})
-        }
-        catch {
-            res.status(400).json({ message: error})
+        try {
+            res.status(200).json({ message: getPassword() });
+        } catch (error) {
+            res.status(400).json({ message: error });
         }
     });
-// });
 
 module.exports = router;
 
