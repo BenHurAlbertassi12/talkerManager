@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const talker = require('./router/talker');
-// const login = require('./router/login');
+const login = require('./router/login');
 
 // veio pronto
 const app = express();
@@ -10,7 +10,7 @@ app.use(express.json());
 // adicionado para requisitos do projeto 1 e 3
 app.use(bodyParser.json());
 app.use('/talker', talker);
-// app.use('/login', login);
+app.use('/login', login);
 
 // veio pronto
 const HTTP_OK_STATUS = 200;
