@@ -9,8 +9,8 @@ app.use(express.json());
 
 // adicionado para requisitos do projeto 1 e 3
 app.use(bodyParser.json());
-app.use('/talker', talker);
 app.use('/login', login);
+app.use('/talker', talker);
 
 // veio pronto
 const HTTP_OK_STATUS = 200;
