@@ -34,28 +34,21 @@ const fieldRate = require('../validator/fieldRate');
 const fieldWatched = require('../validator/fieldWatched');
 const newTalker = require('../middleware/newTalker');
 
-router.post(
-    '/',
+router.post('/',
+fieldName,
     fieldAuthenticate,
-    fieldName,
     fieldAge,
     fieldTalk,
     fieldWatched,
     fieldRate,
     async (req, res) => {
         const BODY_TALKER = req.body;
-
         const TALKER_READ = await talkerRead();
-
         const ID_TALKER = { id: TALKER_READ.length + 1, ...BODY_TALKER };
-
         TALKER_READ.push(ID_TALKER);
-
         await newTalker(TALKER_READ);
-
         return res.status(201).json(ID_TALKER);
-    },
-);
+    });
 
 router.delete('/:id', fieldAuthenticate, (req, res) => {
     const id = Number(req.params.id);
