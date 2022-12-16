@@ -6,5 +6,5 @@ module.exports = (req, res, next) => {
     if (name <= 2) {
         return res.status(400).json({ message: 'O "name" deve pelo menos 3 caracteres' });
     }
-    next();
+    return next();
 };

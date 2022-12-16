@@ -53,7 +53,7 @@ router.post(
 
         await newTalker(talkers);
 
-        res.status(201).json(newTalkersWithId);
+        return res.status(201).json(newTalkersWithId);
     },
 );
 
@@ -66,3 +66,7 @@ router.delete('/:id', fieldAuthenticate, (req, res) => {
 });
 
 module.exports = router;
+
+// código estava dando o mesmo erro do colega Paulo Ferreira
+// https://trybecourse.slack.com/archives/C02T5FNGN07/p1660591463007539
+// basicamente coloquei return em todos os validators e consegui avançar no código

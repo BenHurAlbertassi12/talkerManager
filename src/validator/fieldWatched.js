@@ -12,7 +12,7 @@ const fieldWatched = (req, res, next) => {
             { message: 'O campo "watchedAt" deve ter o formato "dd/mm/aaaa"' },
         );
     }
-    next();
+    return next();
 };
 module.exports = fieldWatched;
 // regex da data retirado do gabarito do dia 04
