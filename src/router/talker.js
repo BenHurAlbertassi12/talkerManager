@@ -26,28 +26,43 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-const { fieldAge } = require('../validator/fieldAge');
-const { fieldName } = require('../validator/fieldName');
-const { fieldRate } = require('../validator/fieldRate');
-const { fieldTalk } = require('../validator/fieldWatched');
-const { fieldWatched } = require('../validator/fieldWatched');
-const { newTalker } = require('../middleware/newTalker');
-const { fieldAuthenticate } = require('../validator/fieldAuthenticate');
+const fieldAuthenticate = require('../validator/fieldAuthenticate');
+const fieldName = require('../validator/fieldName');
+const fieldAge = require('../validator/fieldAge');
+const fieldTalk = require('../validator/fieldWatched');
+const fieldRate = require('../validator/fieldRate');
+const fieldWatched = require('../validator/fieldWatched');
+const newTalker = require('../middleware/newTalker');
 
-router.post('/talker',
-    fieldAge,
+router.post(
+    '/',
     fieldAuthenticate,
     fieldName,
-    fieldRate,
+    fieldAge,
     fieldTalk,
     fieldWatched,
+    fieldRate,
     async (req, res) => {
-        const BODY_TALKER = req.bodyParser;
-        const READ_TALKER = await talkerRead();
-        const ID_TALKER = { id: READ_TALKER.length + 1, ...BODY_TALKER };
-        READ_TALKER.push(ID_TALKER);
-        await newTalker(READ_TALKER);
-        res.status(201).json(ID_TALKER);
-    });
+        const talker = req.body;
+
+        const talkers = await talkerRead();
+
+        const newTalkersWithId = { id: talkers.length + 1, ...talker };
+
+        talkers.push(newTalkersWithId);
+
+        await newTalker(talkers);
+
+        res.status(201).json(newTalkersWithId);
+    },
+);
+
+router.delete('/:id', fieldAuthenticate, (req, res) => {
+    const id = Number(req.params.id);
+    const dbTalker = talkerRead.find((t) => t.id === id);
+    const index = dbTalker.indexOf(dbTalker);
+    newTalker.splice(index, 1);
+    res.sendStatus(200);
+});
 
 module.exports = router;
