@@ -1,16 +1,9 @@
-module.exports = (req, res, next) => {
-    const { talk: { watchedAt } } = req.body;
-
-    if (!watchedAt) {
+function fieldRate(req, res, next) {
+    const { talk: rate } = req.body;
+    if (!rate) res.status(400).json({ message: 'O campo "rate" é obrigatório' });
+    if (!Number.isInteger(rate) || (rate <= 0 && rate >= 6)) {
         res.status(400).json({ message: 'O campo "watchedAt" é obrigatório' });
     }
-
-    const isFormatDate = /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/i;
-
-    if (!isFormatDate.test(watchedAt)) {
-        res.status(400).json({ message: 'O campo "watchedAt" deve ter o formato "dd/mm/aaaa"' });
-    }
-    next();
-};
-
-// regex da data retirado do gabarito do dia 04
+next();
+}
+module.exports = fieldRate;
