@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
 const fieldAuthenticate = require('../validator/fieldAuthenticate');
 const fieldName = require('../validator/fieldName');
 const fieldAge = require('../validator/fieldAge');
-const fieldTalk = require('../validator/fieldWatched');
+const fieldTalk = require('../validator/fieldTalk');
 const fieldRate = require('../validator/fieldRate');
 const fieldWatched = require('../validator/fieldWatched');
 const newTalker = require('../middleware/newTalker');
@@ -43,17 +43,17 @@ router.post(
     fieldWatched,
     fieldRate,
     async (req, res) => {
-        const talker = req.body;
+        const BODY_TALKER = req.body;
 
-        const talkers = await talkerRead();
+        const TALKER_READ = await talkerRead();
 
-        const newTalkersWithId = { id: talkers.length + 1, ...talker };
+        const ID_TALKER = { id: TALKER_READ.length + 1, ...BODY_TALKER };
 
-        talkers.push(newTalkersWithId);
+        TALKER_READ.push(ID_TALKER);
 
-        await newTalker(talkers);
+        await newTalker(TALKER_READ);
 
-        return res.status(201).json(newTalkersWithId);
+        return res.status(201).json(ID_TALKER);
     },
 );
 
