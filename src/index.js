@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const talker = require('./router/talker');
 const login = require('./router/login');
+const talker = require('./router/talker');
 
 // veio pronto
 const app = express();
@@ -11,7 +11,6 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use('/login', login);
 app.use('/talker', talker);
-
 // veio pronto
 const HTTP_OK_STATUS = 200;
 const PORT = '3000';
