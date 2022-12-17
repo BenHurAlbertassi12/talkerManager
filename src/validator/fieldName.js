@@ -8,3 +8,5 @@ module.exports = (req, res, next) => {
     }
     return next();
 };
+// https://trybecourse.slack.com/archives/C03G5SRQSLE/p1671235924939189
+// Colega rodrigo sakae me ajudou na resolução
