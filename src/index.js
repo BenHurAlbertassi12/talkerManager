@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use('/talker', talker);
 app.use('/login', login);
+
 // veio pronto
 const HTTP_OK_STATUS = 200;
 const PORT = '3000';
